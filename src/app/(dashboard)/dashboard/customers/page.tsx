@@ -28,7 +28,7 @@ export default function CustomersPage() {
 
   // Fetch data on component mount
   const fetchUsers = async () => {
-    const response = await fetch('http://localhost:3000/api/auth/users', {
+    const response = await fetch('https://e-commerce-dashboard-gules.vercel.app/api/auth/users', {
       cache: 'no-store',
     });
     const data = await response.json();
@@ -62,7 +62,7 @@ export default function CustomersPage() {
   // Delete user
   const handleDelete = async (id : string)  => {
     if (confirm('Are you sure you want to delete this user?')) {
-      const response = await fetch(`http://localhost:3000/api/auth/users/${id}`, {
+      const response = await fetch(`https://e-commerce-dashboard-gules.vercel.app/api/auth/users/${id}`, {
         method: 'DELETE',
       });
       const data = await response.json();
@@ -202,76 +202,3 @@ export default function CustomersPage() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-// export default async function CustomersPage() {
-//     // Fetch data from the API route
-//     const response = await fetch('http://localhost:3000/api/auth/users', {
-//       cache: 'no-store', // Ensure fresh data is fetched
-//     });
-//     const data = await response.json();
-    
-//     // Filter only admin users
-//     const adminUsers = data.users.filter((user: any) => user.role === 'user');
-  
-//     return (
-//       <div className="p-4">
-//         <h2 className="text-2xl font-bold mb-6">Admin Users</h2>
-//         <div className="bg-white rounded-lg shadow-md overflow-x-auto">
-//           <div className="min-w-[600px]"> {/* Minimum width for the table */}
-//             <table className="w-full">
-//               <thead className="bg-gray-50">
-//                 <tr>
-//                   <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase sm:px-6">Name</th>
-//                   <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase sm:px-6">Email</th>
-//                   <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase sm:px-6 whitespace-nowrap">
-//                     Address
-//                   </th>
-//                   <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase sm:px-6">Phone</th>
-//                   <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase sm:px-6">Role</th>
-//                   <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase sm:px-6">Actions</th>
-//                 </tr>
-//               </thead>
-//               <tbody className="divide-y divide-gray-200">
-//                 {adminUsers.map((customer: any) => (
-//                   <tr key={customer._id}>
-//                     <td className="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">{customer.name}</td>
-//                     <td className="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">{customer.email}</td>
-//                     <td className="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">{customer.address}</td>
-//                     <td className="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">{customer.phone}</td>
-//                     <td className="px-4 py-4 text-sm sm:px-6">
-//                       <span
-//                         className={`px-2 py-1 rounded-full text-xs sm:text-sm ${
-//                           customer.role === 'admin'
-//                             ? 'bg-blue-100 text-blue-800'
-//                             : 'bg-green-100 text-green-800'
-//                         }`}
-//                       >
-//                         {customer.role}
-//                       </span>
-//                     </td>
-//                     <td className="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">
-//                       <button className="text-blue-600 hover:text-blue-900 mr-2 text-xs sm:text-sm">
-//                         Edit
-//                       </button>
-//                       <button className="text-red-600 hover:text-red-900 text-xs sm:text-sm">
-//                         Delete
-//                       </button>
-//                     </td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </table>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
