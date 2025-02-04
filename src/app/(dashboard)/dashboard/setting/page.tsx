@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
-import { IoPersonSharp } from "react-icons/io5";
-import { IdCard } from "lucide-react";
+
 
 interface FormData {
   _id: string;
@@ -28,13 +26,7 @@ const ProfileUpdate = () => {
   });
 
 
-  const [changePassword, setChangePassword] = useState({
-    _id: session?.user.id || "",
-    password : "",
-    newPassword : "",
-    confirmPassword : ""
-  });
-
+  
 
 
 
@@ -85,35 +77,6 @@ const ProfileUpdate = () => {
 
 
 
-
-// const handlePassword = async (e: React.FormEvent)=>{
-//     e.preventDefault();
-//     setLoading(true);
-
-
-//     try{
-
-
-//     }catch(err){
-//         console.log(err)
-//     }
-
-
-
-
-
-// }
-
-
-
-
-
-
-
-
-
-
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -146,9 +109,13 @@ const ProfileUpdate = () => {
       });
 
       alert("Profile updated successfully");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error updating profile:", error);
-      alert(error.message || "An error occurred");
+      if (error instanceof Error) {
+        alert(error.message || "An error occurred");
+      } else {
+        alert("An error occurred");
+      }
     } finally {
       setLoading(false);
     }
@@ -207,52 +174,7 @@ const ProfileUpdate = () => {
           </button>
         </form>
       </div>
-      {/* <div className="w-[40%] my-10">
-      <h2 className="sm:text-[20px]  text-[16px] text-[#FB2E86] font-bold  ">
-          Change Password
-      </h2>
-
-
-      <form onSubmit={handlePassword} className="flex flex-col gap-4  mt-9">
-          <input
-            type="text"
-            name="password"
-            value={changePassword.password}
-            onChange={handleChange}
-            placeholder="Enter current Password"
-            className="p-2 border rounded"
-          />
-          <input
-            type="password"
-            name="newPassword"
-            value={changePassword.newPassword}
-            onChange={handleChange}
-            placeholder="Enter new Password"
-            className="p-2 border rounded"
-       
-          />
-          <input
-            type="text"
-            name="confirmPassword"
-            value={changePassword.confirmPassword}
-            onChange={handleChange}
-            placeholder="Enter ConfirmPassword"
-            className="p-2 border rounded"
-          />
-         
-          <button
-            type="submit"
-            disabled={loading}
-            className={`bg-blue-600 text-white p-2 rounded ${
-              loading ? "opacity-50 cursor-not-allowed" : "hover:[#FB2E86]"
-            }`}
-          >
-            {loading ? "Updating Password..." : "Change PassWord"}
-          </button>
-        </form>
-         
-
-     </div> */}
+   
     </div>
   );
 };
@@ -263,176 +185,14 @@ export default ProfileUpdate;
 
 
 
+// import React from 'react'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 'use client';
-
-// import { useState } from 'react';
-
-// export default function SettingsPage() {
-//   const [settings, setSettings] = useState({
-//     darkMode: false,
-//     notifications: true,
-//     language: 'English',
-//     autoUpdate: false,
-//     privacyMode: false,
-//     theme: 'Light',
-//     backup: 'Daily',
-//     twoFactorAuth: false,
-//   });
-
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-//     const { name, type, checked, value } = e.target as HTMLInputElement;
-//     setSettings((prev) => ({
-//       ...prev,
-//       [name]: type === 'checkbox' ? checked : value,
-//     }));
-//   };
-
+// function page() {
 //   return (
-//     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-//       <h2 className="text-2xl font-bold mb-4">Admin Settings</h2>
-
-//       <div className="mb-4">
-//         <label className="flex items-center space-x-2">
-//           <input
-//             type="checkbox"
-//             name="darkMode"
-//             checked={settings.darkMode}
-//             onChange={handleChange}
-//             className="w-5 h-5"
-//           />
-//           <span>Dark Mode</span>
-//         </label>
-//       </div>
-
-//       <div className="mb-4">
-//         <label className="flex items-center space-x-2">
-//           <input
-//             type="checkbox"
-//             name="notifications"
-//             checked={settings.notifications}
-//             onChange={handleChange}
-//             className="w-5 h-5"
-//           />
-//           <span>Enable Notifications</span>
-//         </label>
-//       </div>
-
-//       <div className="mb-4">
-//         <label className="block mb-2 font-medium">Language</label>
-//         <select
-//           name="language"
-//           value={settings.language}
-//           onChange={handleChange}
-//           className="p-2 border rounded w-full"
-//         >
-//           <option value="English">English</option>
-//           <option value="Urdu">Urdu</option>
-//           <option value="French">French</option>
-//         </select>
-//       </div>
-
-//       <div className="mb-4">
-//         <label className="flex items-center space-x-2">
-//           <input
-//             type="checkbox"
-//             name="autoUpdate"
-//             checked={settings.autoUpdate}
-//             onChange={handleChange}
-//             className="w-5 h-5"
-//           />
-//           <span>Enable Auto Updates</span>
-//         </label>
-//       </div>
-
-//       <div className="mb-4">
-//         <label className="flex items-center space-x-2">
-//           <input
-//             type="checkbox"
-//             name="privacyMode"
-//             checked={settings.privacyMode}
-//             onChange={handleChange}
-//             className="w-5 h-5"
-//           />
-//           <span>Privacy Mode</span>
-//         </label>
-//       </div>
-
-//       <div className="mb-4">
-//         <label className="block mb-2 font-medium">Theme</label>
-//         <select
-//           name="theme"
-//           value={settings.theme}
-//           onChange={handleChange}
-//           className="p-2 border rounded w-full"
-//         >
-//           <option value="Light">Light</option>
-//           <option value="Dark">Dark</option>
-//           <option value="System">System Default</option>
-//         </select>
-//       </div>
-
-//       <div className="mb-4">
-//         <label className="block mb-2 font-medium">Backup Frequency</label>
-//         <select
-//           name="backup"
-//           value={settings.backup}
-//           onChange={handleChange}
-//           className="p-2 border rounded w-full"
-//         >
-//           <option value="Daily">Daily</option>
-//           <option value="Weekly">Weekly</option>
-//           <option value="Monthly">Monthly</option>
-//         </select>
-//       </div>
-
-//       <div className="mb-4">
-//         <label className="flex items-center space-x-2">
-//           <input
-//             type="checkbox"
-//             name="twoFactorAuth"
-//             checked={settings.twoFactorAuth}
-//             onChange={handleChange}
-//             className="w-5 h-5"
-//           />
-//           <span>Enable Two-Factor Authentication</span>
-//         </label>
-//       </div>
+//     <div>
+//      hello
 //     </div>
-//   );
+//   )
 // }
+
+// export default page

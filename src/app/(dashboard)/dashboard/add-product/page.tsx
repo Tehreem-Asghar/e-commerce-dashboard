@@ -28,13 +28,13 @@ export default function AddProduct() {
   };
 
   // Handle tags selection
-  const handleTagsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-    setFormData({
-      ...formData,
-      tags: selectedOptions,
-    });
-  };
+  // const handleTagsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+  //   setFormData({
+  //     ...formData,
+  //     tags: selectedOptions,
+  //   });
+  // };
 
   // Handle image file upload
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {

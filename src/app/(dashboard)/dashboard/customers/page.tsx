@@ -37,13 +37,13 @@ export default function CustomersPage() {
   };
 
   // Edit user
-  const handleEdit = (user : any) => {
+  const handleEdit = (user: User) => {
     setEditUser(user);
     setIsEditModalOpen(true);
   };
 
   // Update user
-  const handleUpdate = async (updatedData : any) => {
+  const handleUpdate = async (updatedData: Partial<User>) => {
     if (!editUser) return;
     const response = await fetch(`http://localhost:3000/api/auth/users/${editUser._id}`, {
       method: 'PUT',
@@ -60,7 +60,7 @@ export default function CustomersPage() {
   };
 
   // Delete user
-  const handleDelete = async (id : any)  => {
+  const handleDelete = async (id : string)  => {
     if (confirm('Are you sure you want to delete this user?')) {
       const response = await fetch(`http://localhost:3000/api/auth/users/${id}`, {
         method: 'DELETE',
@@ -143,10 +143,10 @@ export default function CustomersPage() {
                 e.preventDefault();
                 const formData = new FormData(e.target as HTMLFormElement);
                 const updatedData = {
-                  name: formData.get('name'),
-                  email: formData.get('email'),
-                  address: formData.get('address'),
-                  phone: formData.get('phone'),
+                  name: formData.get('name') as string,
+                  email: formData.get('email') as string,
+                  address: formData.get('address') as string,
+                  phone: formData.get('phone') as string,
                 };
                 handleUpdate(updatedData);
               }}

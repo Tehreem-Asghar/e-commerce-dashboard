@@ -1,8 +1,6 @@
-import { Home,  Settings , ListOrdered , Package , PlusIcon,  BarChart2 ,LogOut ,Users  } from "lucide-react"
+import { Home,  Settings , ListOrdered , Package , PlusIcon,  BarChart2 ,Users  } from "lucide-react"
 
 
-
-import { Style_Script } from "next/font/google";
 import { Josefin_Sans } from "next/font/google";
 
 
@@ -14,10 +12,6 @@ const josefinSans = Josefin_Sans({
 
  
 
-  const styleScript = Style_Script({
-    subsets: ["latin"],
-    weight: "400",
-  });
   
 
 import {

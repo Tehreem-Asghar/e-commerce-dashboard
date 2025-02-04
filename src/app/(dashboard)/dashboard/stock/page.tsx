@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import client from "../../../../sanity/lib/client";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Stock() {
   interface Product {
@@ -81,10 +82,12 @@ export default function Stock() {
                     className="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200"
                   >
                     <td className="py-3 px-4">
-                      <img
+                      <Image
                         src={product.image}
                         alt={product.name}
                         className="w-12 h-12 object-cover rounded"
+                        height={48}
+                        width={48}
                       />
                     </td>
                     <td className="py-3 px-4   whitespace-nowrap">{product.name}</td>
@@ -153,7 +156,9 @@ export default function Stock() {
                     className="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200"
                   >
                     <td className="py-3 px-4">
-                      <img
+                      <Image
+                        height={48}
+                         width={48}
                         src={product.image}
                         alt={product.name}
                         className="w-12 h-12 object-cover rounded"
