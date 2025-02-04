@@ -1,4 +1,4 @@
-import { Home,  Settings , ListOrdered , Package , PlusIcon,  BarChart2 ,Users  } from "lucide-react"
+import { Home,  Settings , ListOrdered , Package , PlusIcon ,Users  } from "lucide-react"
 
 
 import { Josefin_Sans } from "next/font/google";
@@ -54,11 +54,11 @@ const items = [
     url: "/dashboard/customers",
     icon: Users,
   },
-  {
-    title : "Analytics",
-    url : "/dashboard/analytics",
-    icon :   BarChart2 ,
-  },
+  // {
+  //   title : "Analytics",
+  //   url : "/dashboard/analytics",
+  //   icon :   BarChart2 ,
+  // },
   {
     title: "Settings",
     url: "/dashboard/setting",

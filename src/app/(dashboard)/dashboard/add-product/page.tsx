@@ -79,7 +79,7 @@ export default function AddProduct() {
 
       await client.create(newProduct);
       alert("Product added successfully!");
-      router.push("/stock"); // Redirect to stock page after adding
+      router.push("/dashboard/stock"); // Redirect to stock page after adding
     } catch (error) {
       console.error("Failed to add product:", error);
       alert("Failed to add product.");
