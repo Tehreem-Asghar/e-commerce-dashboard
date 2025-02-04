@@ -45,7 +45,7 @@ export default function CustomersPage() {
   // Update user
   const handleUpdate = async (updatedData: Partial<User>) => {
     if (!editUser) return;
-    const response = await fetch(`http://localhost:3000/api/auth/users/${editUser._id}`, {
+    const response = await fetch(`https://e-commerce-dashboard-gules.vercel.app/api/auth/users/${editUser._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
