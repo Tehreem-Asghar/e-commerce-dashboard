@@ -52,33 +52,33 @@ async function getProducts(): Promise<number> {
   return res.length;
 }
 
-async function getData(): Promise<OrderData[]> {
-  const res: OrderData[] = await client.fetch(`*[_type == "customerOrder"] {
-    _id,
-    customerName,
-    phone,
-    email,
-    address,
-    orderDate,
-    totalAmount,
-    status,
-    items[] {
-      product->{
-        name,
-        "image": image.asset->url,
-        price,
-        description,
-        discountPercentage,
-        isFeaturedProduct,
-        stockLevel,
-        category,
-        tags
-      },
-      quantity
-    }
-  }`);
-  return res;
-}
+// async function getData(): Promise<OrderData[]> {
+//   const res: OrderData[] = await client.fetch(`*[_type == "customerOrder"] {
+//     _id,
+//     customerName,
+//     phone,
+//     email,
+//     address,
+//     orderDate,
+//     totalAmount,
+//     status,
+//     items[] {
+//       product->{
+//         name,
+//         "image": image.asset->url,
+//         price,
+//         description,
+//         discountPercentage,
+//         isFeaturedProduct,
+//         stockLevel,
+//         category,
+//         tags
+//       },
+//       quantity
+//     }
+//   }`);
+//   return res;
+// }
 
 const fetchUsers = async (): Promise<number> => {
   const response = await fetch("https://e-commerce-dashboard-gules.vercel.app/api/auth/users", {
@@ -118,13 +118,13 @@ async function getOrders(): Promise<OrderData[]> {
 }
 
 export default async function Home() {
-  const data = await getData();
+  // const data = await getData();
   const users = await fetchUsers();
   const product = await getProducts();
   const orders = await getOrders();
 
-  const sales = data.length;
-  const deliveredOrders = data.filter((order) => order.status === "delivered");
+  // const sales = data.length;
+  const deliveredOrders = orders.filter((order) => order.status === "delivered");
   const totalSales = deliveredOrders.length;
 
   return (
@@ -144,7 +144,7 @@ export default async function Home() {
         <div className="bg-gradient-to-r from-pink-600 to-pink-400 shadow-pink-600 text-white p-6 rounded-lg shadow-lg flex items-center justify-between">
           <span>
             <h3 className="text-lg font-semibold">Total Orders</h3>
-            <p className="text-2xl font-bold">{sales}</p>
+            <p className="text-2xl font-bold">{orders.length}</p>
           </span>
           <IoIosApps className="text-[70px]" />
         </div>

@@ -15,7 +15,7 @@ interface FormData {
 const ProfileUpdate = () => {
   const { data: session, update } = useSession();
 
-  console.log("session", session);
+   console.log("session", session);
 
   const [formData, setFormData] = useState<FormData>({
     _id: session?.user.id || "",

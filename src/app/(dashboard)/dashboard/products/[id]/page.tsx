@@ -65,7 +65,7 @@ export default function EditProduct({ params }: { params: Params }) {
         .set(formData)
         .commit();
       alert("Product updated successfully!");
-      router.push("/stock"); // Redirect to stock page after update
+      router.push("/dashboard/stock"); // Redirect to stock page after update
     } catch (error) {
       console.error("Failed to update product:", error);
       alert("Failed to update product.");
