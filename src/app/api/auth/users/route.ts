@@ -12,7 +12,13 @@ export async function GET() {
       return NextResponse.json({ message: 'Users not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ message: 'Users fetched successfully', users });
+    // return NextResponse.json({ message: 'Users fetched successfully', users });
+
+    return NextResponse.json(
+      { message: "Users fetched successfully", users },
+      { status: 200, headers: { 'Cache-Control': 'no-store' } } // No cache
+    );
+
   } catch (error) {
     return NextResponse.json({ message: 'Error fetching users', error }, { status: 500 });
   }

@@ -52,33 +52,6 @@ async function getProducts(): Promise<number> {
   return res.length;
 }
 
-// async function getData(): Promise<OrderData[]> {
-//   const res: OrderData[] = await client.fetch(`*[_type == "customerOrder"] {
-//     _id,
-//     customerName,
-//     phone,
-//     email,
-//     address,
-//     orderDate,
-//     totalAmount,
-//     status,
-//     items[] {
-//       product->{
-//         name,
-//         "image": image.asset->url,
-//         price,
-//         description,
-//         discountPercentage,
-//         isFeaturedProduct,
-//         stockLevel,
-//         category,
-//         tags
-//       },
-//       quantity
-//     }
-//   }`);
-//   return res;
-// }
 
 const fetchUsers = async (): Promise<number> => {
   const response = await fetch("https://e-commerce-dashboard-gules.vercel.app/api/auth/users", {
@@ -118,12 +91,12 @@ async function getOrders(): Promise<OrderData[]> {
 }
 
 export default async function Home() {
-  // const data = await getData();
+ 
   const users = await fetchUsers();
   const product = await getProducts();
   const orders = await getOrders();
 
-  // const sales = data.length;
+ 
   const deliveredOrders = orders.filter((order) => order.status === "delivered");
   const totalSales = deliveredOrders.length;
 
