@@ -64,9 +64,9 @@ export default function AddProduct() {
         _type: "product",
         name: formData.name,
         price: formData.price.toString(), // Ensure price is a string
-        stockLevel: formData.stockLevel,
+        stockLevel: Number(formData.stockLevel),
         description: formData.description, // Include description
-        isFeaturedProduct: formData.isFeaturedProduct, // Convert to boolean
+        isFeaturedProduct: Boolean(formData.isFeaturedProduct), // Convert to boolean
         discountPercentage: parseFloat(formData.discountPercentage.toString()),
         category: formData.category,
         tags: formData.tags, // Add tags to the product
@@ -110,8 +110,8 @@ export default function AddProduct() {
 
   // isFeaturedProduct options
   const isFeaturedOptions = [
-    { title: "Yes", value: true },
-    { title: "No", value: false },
+    { title: "true", value: true },
+    { title: "false", value: false },
   ];
 
   return (
@@ -143,7 +143,7 @@ export default function AddProduct() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Stock Level</label>
           <input
-            type="number"
+            type= "number"
             name="stockLevel"
             value={formData.stockLevel}
             onChange={handleChange}
