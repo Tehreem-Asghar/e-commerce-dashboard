@@ -1,4 +1,4 @@
-// app/add-product/page.js
+
 "use client"; // Client-side component
 import React, { useState } from "react";
 import client from "../../../../sanity/lib/client";
@@ -9,11 +9,12 @@ export default function AddProduct() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
-    price: 0,
+    price: "0",
     stockLevel: 0,
+    description: "",
     discountPercentage: 0,
     category: "",
-    isFeaturedProduct: "", // For isFeaturedProduct dropdown
+    isFeaturedProduct: false, // For isFeaturedProduct dropdown
     tags: [] as string[], // For tags
     image: null as null | SanityImageAssetDocument, // For image file
   });
@@ -28,13 +29,13 @@ export default function AddProduct() {
   };
 
   // Handle tags selection
-  // const handleTagsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-  //   setFormData({
-  //     ...formData,
-  //     tags: selectedOptions,
-  //   });
-  // };
+  const handleTagsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+    setFormData({
+      ...formData,
+      tags: selectedOptions,
+    });
+  };
 
   // Handle image file upload
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,9 +63,10 @@ export default function AddProduct() {
       const newProduct = {
         _type: "product",
         name: formData.name,
-        price: parseFloat(formData.price.toString()),
-        stockLevel: parseInt(formData.stockLevel.toString()),
-        isFeaturedProduct: formData.isFeaturedProduct === "true", // Convert to boolean
+        price: formData.price.toString(), // Ensure price is a string
+        stockLevel: formData.stockLevel,
+        description: formData.description, // Include description
+        isFeaturedProduct: formData.isFeaturedProduct, // Convert to boolean
         discountPercentage: parseFloat(formData.discountPercentage.toString()),
         category: formData.category,
         tags: formData.tags, // Add tags to the product
@@ -86,6 +88,13 @@ export default function AddProduct() {
     }
   };
 
+  const category = [
+    { title: 'Chair', value: 'Chair' },
+    { title: 'Sofa', value: 'Sofa' },
+    { title: 'Electronic', value: 'electronic' },
+    { title: 'Other', value: 'other' },
+  ];
+
   // Tags options
   const tagOptions = [
     { title: "Featured", value: "featured" },
@@ -101,8 +110,8 @@ export default function AddProduct() {
 
   // isFeaturedProduct options
   const isFeaturedOptions = [
-    { title: "Yes", value: "true" },
-    { title: "No", value: "false" },
+    { title: "Yes", value: true },
+    { title: "No", value: false },
   ];
 
   return (
@@ -153,21 +162,40 @@ export default function AddProduct() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Category</label>
+          <label className="block text-sm font-medium text-gray-700">Description</label>
           <input
             type="text"
-            name="category"
-            value={formData.category}
+            name="description"
+            value={formData.description}
             onChange={handleChange}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             required
           />
         </div>
         <div>
+          <label className="block text-sm font-medium text-gray-700">Category</label>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+            required
+          >
+            <option value="" disabled>
+              Select an option
+            </option>
+            {category.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.title}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
           <label className="block text-sm font-medium text-gray-700">Is Featured Product</label>
           <select
             name="isFeaturedProduct"
-            value={formData.isFeaturedProduct}
+            value={formData.isFeaturedProduct.toString()} // Convert boolean to string
             onChange={handleChange}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             required
@@ -176,7 +204,7 @@ export default function AddProduct() {
               Select an option
             </option>
             {isFeaturedOptions.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option key={option.title} value={option.value.toString()}>
                 {option.title}
               </option>
             ))}
@@ -186,14 +214,12 @@ export default function AddProduct() {
           <label className="block text-sm font-medium text-gray-700">Tags</label>
           <select
             name="tags"
+            multiple // Allow multiple selections
             value={formData.tags}
-            onChange={handleChange} // Use handleChange for single selection
+            onChange={handleTagsChange} // Use handleTagsChange for multiple selection
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             required
           >
-            <option value="" disabled>
-              Select a tag
-            </option>
             {tagOptions.map((tag) => (
               <option key={tag.value} value={tag.value}>
                 {tag.title}
